@@ -1,4 +1,4 @@
-# Neighborhood Map React App 8° FEND Project Udacity
+# Neighborhood Map React App 8° FEND  Udacity's Project
 
 Final project of Udacity's Front-End Web Developer Nanodegree Program.
 Developed with React App the project represents a Lombardy's map with location and brief description of its provinces.

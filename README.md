@@ -1,4 +1,4 @@
-# Neighborhood Map React App 8° FEND  Udacity's Project
+# Neighborhood Map React App 8° FEND Project Udacity
 
 Final project of Udacity's Front-End Web Developer Nanodegree Program.
 Developed with React App the project represents a Lombardy's map with location and brief description of its provinces.
@@ -11,6 +11,10 @@ You can find more information on how to perform common tasks here.
 - [create App](https://github.com/facebook/create-react-app "create App")
 - [README](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md "README")
 - A [JavaScript library](https://reactjs.org/) for building user interfaces
+
+To serve assets from local cache a **service worker** is registered in production. Service worker lets the app load faster on subsequent visits in production, and gives it offline capabilities. However, it also means that developers (and users) will only see deployed updates on the "N+1" visit to a page, since previously cached resources are updated in the background.
+To learn more about the benefits of this model, read [https://goo.gl/KwvDNy](https://goo.gl/KwvDNy "Service worker's Infos") (includes instructions on opting out of this behavior).
+
 
 
 ## Getting Project Started
@@ -26,3 +30,4 @@ Clone or download zip file [https://github.com/ali-pia/Neighborhood-Map-React ](
 The application has a list of Lombardy's provinces displayed in the left side.
 When the user clicks on the list or the marker the map displaied the localization and the information about the city selected.
 Also integrated the search function by typing name.
+

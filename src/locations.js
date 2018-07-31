@@ -6,7 +6,6 @@ import './App.css'
 
 var markers =[];
 var allInfowindows = [];
-
 class locations extends React.Component {
 
   constructor(props) {
@@ -27,13 +26,15 @@ class locations extends React.Component {
             let info = [...this.state.infos, [responseJson, responseJson[2][0], responseJson[3][0]]]
             this.updateInfo(info)
           }).catch(error =>
-            console.error(error))
+            alert("We couldn't load WikiPedia. Please, try reloading this page... :("))
         })
     }
 
 
   componentWillReceiveProps({isScriptLoaded}) {
-    if(isScriptLoaded){
+    if(typeof window.google === 'undefined'){
+      alert("We couldn't load maps. Please, try reloading this page... :(");
+    }else if(isScriptLoaded){
       var mapview = document.getElementById('map');
         mapview.style.height = window.innerHeight + "px";
         var map = new window.google.maps.Map(mapview, {
@@ -44,7 +45,6 @@ class locations extends React.Component {
       this.setState({map: map});
 
     }
-
     else {
       console.log("Error in loading map");
     }
@@ -76,9 +76,12 @@ class locations extends React.Component {
       mark.setMap(null)
     });
 
+    //ADD ERRORS MESSAGE ON USER'S PAGE IF GOOGLE MAPS API AND WIKIPEDIA API DOESN'T LOAD
     markers = [];
     allInfowindows = [];
-    showingList.map((marker, index) => {
+     if(typeof window.google === 'undefined'){
+      alert("We couldn't load maps. Please, try reloading this page... :(");
+    }else{showingList.map((marker, index) => {
       let getInfo = this.state.infos.filter((single) => marker.name === single[0][0]).map(second =>
         { if (second.length === 0) {
           return 'No information found for selected location';
@@ -103,11 +106,22 @@ class locations extends React.Component {
       markers.push(addMarker);
       allInfowindows.push(addInfo);
 
-      addMarker.addListener('click', function() {
+     addMarker.addListener('click', function() {
         allInfowindows.forEach(item => {item.close()});
         addInfo.open(map, addMarker);
+        
+        //ADD MARKER ANIMATION
+        
+        if (addMarker.getAnimation() !== null) {
+          addMarker.setAnimation(null);
+        } else {
+          addMarker.setAnimation(window.google.maps.Animation.BOUNCE);
+          window.setTimeout(function(){
+          	 addMarker.setAnimation(null);
+          	}, 1000);
+        }
       });
-    })
+    })}
   }
 
     listItem = (item, event) => {
